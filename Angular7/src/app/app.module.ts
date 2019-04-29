@@ -25,8 +25,8 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [EmployeeService,DatePipe],
   bootstrap: [AppComponent]

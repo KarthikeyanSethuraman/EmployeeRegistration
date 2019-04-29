@@ -8,7 +8,7 @@
   <div class="form-group">
       <label>LAST NAME</label>
       <input name="lastName" #lastName="ngModel" [(ngModel)]="service.formData.lastName" class="form-control" required>
-      <div class="validation-error" *ngIf="lastName.invalid && firstName.touched">This field is required.</div>
+      <div class="validation-error" *ngIf="lastName.invalid && lastName.touched">This field is required.</div>
   </div>
   <div class="form-group">
       <label>DEPARTMENT</label>

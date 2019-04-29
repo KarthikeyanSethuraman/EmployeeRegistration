@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {BsDatepickerConfig} from 'ngx-bootstrap'
+import {BsDatepickerConfig} from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
 
 @Component({
