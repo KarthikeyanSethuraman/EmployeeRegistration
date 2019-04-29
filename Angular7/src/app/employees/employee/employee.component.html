@@ -1,0 +1,33 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+  <div class="form-group">
+    <label>FIRST NAME</label>
+    <input name="firstName" #firstName="ngModel" [(ngModel)]="service.formData.firstName" class="form-control" required>
+    <div class="validation-error" *ngIf="firstName.invalid && firstName.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <label>LAST NAME</label>
+    <input name="lastName" #lastName="ngModel" [(ngModel)]="service.formData.lastName" class="form-control" required>
+    <div class="validation-error" *ngIf="lastName.invalid && firstName.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <label>EMAIL</label>
+    <input name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="service.formData.email" class="form-control" required>
+    <div class="validation-error" *ngIf="email.invalid && email.touched">This field is required.</div>
+
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>EMP CODE</label>
+      <input name="empCode" #empCode="ngModel" [(ngModel)]="service.formData.empCode" class="form-control" minlength="3" pattern="[0-9]+">
+    </div>
+    <div class="form-group  col-md-6">
+      <label>MOBILE</label>
+      <input name="mobileNumber" #mobileNumber="ngModel" [(ngModel)]="service.formData.mobileNumber" class="form-control" minlength="10" maxlength="10" pattern="[0-9]+">
+    </div>
+    
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+  </div>
+</form>
