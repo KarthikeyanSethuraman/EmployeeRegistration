@@ -23,23 +23,23 @@ public class EmployeeController {
 	EmployeeService employeeService;
 
 	@PostMapping("Employee/save")
-	public void createEmployee(@RequestBody Employee employee) {
+	public void createEmployee(@RequestBody Employee employee) throws Exception{
 		employeeService.saveEmployee(employee);
 	}
 	
 	@GetMapping("Employee/list")
-	public List<Employee> listEmployee(){
+	public List<Employee> listEmployee() throws Exception{
 		return employeeService.getListEmployee();
 	} 
 	
 	@PutMapping("Employee/update/{id}")
-	public void updateEmployee(@PathVariable int id,@RequestBody Employee employee) {
+	public void updateEmployee(@PathVariable int id,@RequestBody Employee employee) throws Exception{
 		employee.setId(id);
 		employeeService.updateEmployee(employee);
 	}
 	
 	@DeleteMapping("Employee/delete/{id}")
-	public void deleteEmployee(@PathVariable int id) {
+	public void deleteEmployee(@PathVariable int id) throws Exception{
 		employeeService.deleteEmployee(id);
 	}
 }

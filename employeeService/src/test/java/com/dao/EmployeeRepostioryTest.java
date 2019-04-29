@@ -2,6 +2,8 @@ package com.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.employee.EmployeeStarter;
 import com.employee.dao.EmployeeRepository;
+import com.employee.exception.EmployeeRepositoryException;
 import com.employee.model.Employee;
 
 @RunWith(SpringRunner.class)
@@ -26,26 +29,31 @@ public class EmployeeRepostioryTest {
 	
 	private Employee getEmployee() {
 		Employee employee = new Employee();
-		employee.setEmail("test@gmail.com");
-		employee.setEmpCode("123");
+		employee.setDepartment("Software Developement");
 		employee.setFirstName("test");
 		employee.setLastName("test");
-		employee.setMobileNumber("1234567890");
+		employee.setGender("Male");
+		employee.setDob(getCurrentDate());
 		return employee;
 	}
 	
+	private String getCurrentDate() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
+		return dtf.format(localDate);
+	}
+	
 	@Test
-	public void createEmployeeTest() {
+	public void createEmployeeTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		int id = employeeRepository.saveEmployee(employee);
 		Employee emp= employeeRepository.findByEmployeeId(id);
-		assertEquals(emp.getEmail(),employee.getEmail());
 		assertEquals(emp.getFirstName(),employee.getFirstName());
 		assertEquals(emp.getLastName(),employee.getLastName());
 	}
 	
 	@Test
-	public void findByFirstNameTest() {
+	public void findByFirstNameTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		employeeRepository.saveEmployee(employee);
 		Employee emp = employeeRepository.findByEmployeeName("test");
@@ -53,7 +61,7 @@ public class EmployeeRepostioryTest {
 	}
 	
 	@Test
-	public void findByIdTest() {
+	public void findByIdTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		int empId = employeeRepository.saveEmployee(employee);
 		Employee emp = employeeRepository.findByEmployeeId(empId);
@@ -61,7 +69,7 @@ public class EmployeeRepostioryTest {
 	}
 	
 	@Test
-	public void updateEmployeeTest() {
+	public void updateEmployeeTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		int empId = employeeRepository.saveEmployee(employee);
 		employee.setId(empId);
@@ -72,7 +80,7 @@ public class EmployeeRepostioryTest {
 	}
 	
 	@Test
-	public void getEmployeesTest() {
+	public void getEmployeesTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		employeeRepository.saveEmployee(employee);
 		List<Employee> emp = employeeRepository.getEmployees();
@@ -80,7 +88,7 @@ public class EmployeeRepostioryTest {
 	}
 	
 	@Test
-	public void deleteEmployeeTest() {
+	public void deleteEmployeeTest() throws EmployeeRepositoryException {
 		Employee employee = getEmployee();
 		int empId = employeeRepository.saveEmployee(employee);
 		int result = employeeRepository.deleteEmployee(empId);

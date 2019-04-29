@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.employee.dao.EmployeeRepository;
+import com.employee.dao.impl.EmployeeRepositoryImpl;
 import com.employee.model.Employee;
-import com.employee.service.EmployeeService;
+import com.employee.service.impl.EmployeeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
@@ -33,10 +35,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EmployeeControllerTest {
 	
 	@MockBean
-	EmployeeService employeeService;
+	EmployeeServiceImpl employeeService;
 	
 	@MockBean
-	EmployeeRepository employeeRepository;
+	EmployeeRepositoryImpl employeeRepository;
 	
     private JacksonTester <Employee> jsonView;
 	
@@ -53,13 +55,18 @@ public class EmployeeControllerTest {
 	
 	private Employee getEmployee() {
 		Employee employee = new Employee();
-		employee.setEmail("test@gmail.com");
-		employee.setEmpCode("123");
+		employee.setDepartment("Software Developement");
 		employee.setFirstName("test");
 		employee.setLastName("test");
-		employee.setMobileNumber("1234567890");
-		employee.setId(1);
+		employee.setGender("Male");
+		employee.setDob(getCurrentDate());
 		return employee;
+	}
+	
+	private String getCurrentDate() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
+		return dtf.format(localDate);
 	}
 	
 	private List<Employee> getListOfEmployee(){

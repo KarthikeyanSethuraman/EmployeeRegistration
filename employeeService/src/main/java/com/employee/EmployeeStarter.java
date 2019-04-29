@@ -2,6 +2,8 @@ package com.employee;
 
 import java.util.Collections;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -19,17 +21,22 @@ import org.springframework.web.filter.CorsFilter;
 @ComponentScan(basePackages={"com.*"})
 public class EmployeeStarter extends SpringBootServletInitializer {
 
+	private static final Logger logg= LoggerFactory.getLogger(EmployeeStarter.class);
+	
 	@Override
 	public SpringApplicationBuilder configure(SpringApplicationBuilder applicationBuilder){
+		logg.info("Employee Service Application is starting on External Tomcat Server ....");
 		return applicationBuilder.sources(EmployeeStarter.class);
 	}
 
 	public static void main(String[] args) {
+		logg.info("Employee Service Application is starting on Embedded Tomcat Server ....");
 		SpringApplication.run(EmployeeStarter.class, args);
 	}
 	
     @Bean
     public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+    	logg.info("Setting Cross orgin setup for allow spring boot servlet");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);

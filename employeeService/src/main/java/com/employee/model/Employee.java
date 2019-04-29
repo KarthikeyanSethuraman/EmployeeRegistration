@@ -4,10 +4,10 @@ public class Employee {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String empCode;
-	private String mobileNumber;
-	private String email;
-	
+	private String department;
+	private String gender;
+	private String dob;
+
 	public int getId() {
 		return id;
 	}
@@ -26,24 +26,22 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getEmpCode() {
-		return empCode;
+	public String getGender() {
+		return gender;
 	}
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
+	public void setGender(String gneder) {
+		this.gender = gneder;
 	}
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getDob() {
+		return dob;
 	}
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
-	public String getEmail() {
-		return email;
+	public String getDepartment() {
+		return department;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
-	
-	
 }
